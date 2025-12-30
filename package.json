@@ -1,13 +1,17 @@
 {
   "name": "spur-chat-monorepo",
   "private": true,
-  "workspaces": ["backend", "frontend"],
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
     "dev": "concurrently \"npm run dev -w backend\" \"npm run dev -w frontend\"",
     "install:all": "npm install -w frontend && npm install -w backend",
     "build:backend": "npm run build -w backend"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "concurrently": "^8.2.2"
   }
 }
