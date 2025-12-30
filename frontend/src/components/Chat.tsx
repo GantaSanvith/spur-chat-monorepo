@@ -356,7 +356,7 @@
 // export default Chat;
 
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+ import React, { useState, useRef, useEffect, useCallback } from "react";
 import "./Chat.css";
 
 type Sender = "user" | "ai";
@@ -368,7 +368,8 @@ interface ChatMessage {
   createdAt: string;
 }
 
-const API_URL = 'https://spur-chat-backend1.onrender.com'; // ✅ FIXED: Render backend!
+// ✅ FIXED: Backend Render URL (NOT Netlify!)
+const API_URL = 'https://spur-chat-backend1.onrender.com';
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -386,11 +387,11 @@ const Chat: React.FC = () => {
     }
   }, []);
 
-  // ✅ FIXED: Load history ONLY when sessionId changes (NO LOOP!)
+  // Load history ONLY when sessionId changes
   useEffect(() => {
     if (sessionId) {
       console.log('📱 Loading history for session:', sessionId);
-      fetch(`${API_URL}/chat/history/${sessionId}`) // ✅ FIXED: Render URL
+      fetch(`${API_URL}/chat/history/${sessionId}`)
         .then((res) => {
           if (!res.ok) throw new Error('Failed to load history');
           return res.json();
@@ -404,7 +405,7 @@ const Chat: React.FC = () => {
           setMessages([]);
         });
     }
-  }, [sessionId]); // ✅ ONLY sessionId dependency - NO LOOP!
+  }, [sessionId]);
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -427,7 +428,7 @@ const Chat: React.FC = () => {
     setIsSending(true);
 
     try {
-      const response = await fetch(`${API_URL}/chat/message`, { // ✅ FIXED: Render URL
+      const response = await fetch(`${API_URL}/chat/message`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
