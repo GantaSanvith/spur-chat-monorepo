@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "spur-chat-frontend/**",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "build" }
+    },
+    {
+      "src": "spur-chat-backend/dist/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/chat/(.*)",
+      "dest": "spur-chat-backend/dist/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "spur-chat-frontend/build/$1"
+    }
+  ],
+  "installCommand": "npm install --legacy-peer-deps"
+}
