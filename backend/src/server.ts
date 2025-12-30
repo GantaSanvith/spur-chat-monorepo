@@ -77,14 +77,7 @@ const PORT = process.env.PORT || 4000 || 10000; // Render uses 10000
 
 // ✅ FIXED CORS: ALL Netlify + YOUR SITES
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'https://snazzy-meerkat-496e3e.netlify.app',     // ✅ YOUR NEW SITE
-    'https://profound-taffy-e74e35.netlify.app',     // ✅ OLD SITE
-    'https://*.netlify.app',                         // ✅ ALL Netlify
-    'https://*.vercel.app'                           // ✅ Vercel too
-  ],
+  origin: '*',
   credentials: true
 }));
 
